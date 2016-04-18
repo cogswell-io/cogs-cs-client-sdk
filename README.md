@@ -9,7 +9,7 @@ The Cogs SDK real-time message brokering system
 * C# 5.0
 * Visual Studio 12+
 
-## Installation
+## [Installation] (#build-details)
 ### Manual
 * Check out or download Cogs SDK
 * Open gambit-sdk.sln in Visual Studio
