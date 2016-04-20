@@ -10,6 +10,7 @@ The Cogs SDK real-time message brokering system
 * Visual Studio 12+
 
 ## [Installation] (#build-details)
+
 ### Manual
 * Check out or download Cogs SDK
 * Open gambit-sdk.sln in Visual Studio
@@ -59,7 +60,7 @@ eventModel.AccessKey = accessKey;
 //Set the event model's event name
 eventModel.EventName = "EventExample";
 
-//Select which Namespace this event pertains to. This Namespace will need 
+//Select which Namespace this event pertains to. This Namespace will need
 //to be defined in the Web UI.
 eventModel.Namespace = "ExampleNamespace";
 
@@ -85,7 +86,7 @@ Task<Response<EventResponse>> futureEventResponse = cogsService.EventAsync(event
 
 //handle the event response
 Response<EventResponse> eventResponse = await futureEventResponse;
- 
+
 if (eventResponse.IsSuccess)
 {
   //handle success case
@@ -102,16 +103,16 @@ else
 This API route is used to subscribe to a particular topic.
 
 ```cs
-//Initialize the model which will store all the data necessary for subscribing. 
+//Initialize the model which will store all the data necessary for subscribing.
 PushModel subscribeModel = new GambitData.PushModel();
 
 //Set the model client salt
 subscribeModel.ClientSalt = clientSalt;
 
-//set the model access key 
+//set the model access key
 subscribeModel.AccessKey = accessKey;
 
-//Set the namespace which this model is using 
+//Set the namespace which this model is using
 subscribeModel.Namespace = "ExampleNamespace";
 
 //Set the timestamp to be the current time in ISO format.
@@ -123,7 +124,7 @@ subscribeModel.Timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ");
 subscribeModel.Attributes = attributes;
 
 //Here is defined what action will take place in the event a message is received.
-Action<MessageResponse> action = (MessageResponse) => 
+Action<MessageResponse> action = (MessageResponse) =>
 {
   //Do some action using the data you have received from a message
 
@@ -159,4 +160,8 @@ Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
+<<<<<<< HEAD
 limitations under the License.
+=======
+limitations under the License.
+>>>>>>> temprepo/master
