@@ -104,6 +104,7 @@
     <Compile Include="PropertieBody.cs" />
     <Compile Include="Properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Response\ForwardedEvent.cs" />
     <Compile Include="Response\MessageResponse.cs" />
     <Compile Include="Response\NamespaceResponse.cs" />
     <Compile Include="Response\RandomUuIdResponse.cs" />

@@ -45,6 +45,6 @@
         /// <summary>
         /// The validate required proparties.
         /// </summary>
-        void ValidateRequiredProparties();
+        void ValidateRequiredProperties();
     }
 }

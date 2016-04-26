@@ -62,7 +62,7 @@
     <Compile Include="GambitSDKService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)\GambitCore\GambitCore.csproj">
+    <ProjectReference Include="..\GambitCore\GambitCore.csproj">
       <Project>{aa0359b4-efad-4bcb-8112-acfcbad18476}</Project>
       <Name>GambitCore</Name>
     </ProjectReference>

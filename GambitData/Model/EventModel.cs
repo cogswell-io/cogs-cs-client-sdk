@@ -60,12 +60,21 @@
         [DataMember(Name = "namespace")]
         public string Namespace { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Timestamp
+        /// </summary>
         [DataMember(Name = "timestamp")]
         public string Timestamp { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Debug Directive
+        /// </summary>
         [DataMember(Name = "debug_directive", IsRequired = false, EmitDefaultValue = false)]
         public string DebugDirective { get; set; }
 
+        /// <summary>
+        /// Gets or sets the ForwardAsMessage
+        /// </summary>
         [DataMember(Name = "forward_as_message", IsRequired = false, EmitDefaultValue = false)]
         public bool ForwardAsMessage { get; set; }
 
@@ -74,26 +83,26 @@
         /// </summary>
         /// <exception cref="ArgumentException">
         /// </exception>
-        public void ValidateRequiredProparties()
+        public void ValidateRequiredProperties()
         {
             if (string.IsNullOrEmpty(this.ClientSalt))
             {
-                throw new ArgumentException("Proparty ClientSalt is required from EventPostBody class");
+                throw new ArgumentException("Property ClientSalt is required from EventPostBody class");
             }
 
             if (string.IsNullOrEmpty(this.EventName))
             {
-                throw new ArgumentException("Proparty EventName is required from EventPostBody class");
+                throw new ArgumentException("Property EventName is required from EventPostBody class");
             }
 
             if (string.IsNullOrEmpty(this.AccessKey))
             {
-                throw new ArgumentException("Proparty AccessKey is required from EventPostBody class");
+                throw new ArgumentException("Property AccessKey is required from EventPostBody class");
             }
 
             if (string.IsNullOrEmpty(this.Namespace))
             {
-                throw new ArgumentException("Proparty Namespace is required from EventPostBody class");
+                throw new ArgumentException("Property Namespace is required from EventPostBody class");
             }
         }
 

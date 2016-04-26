@@ -9,27 +9,21 @@
     public interface IEventAttributes
     {
         /// <summary>
-        /// Gets or sets the attributes.
+        /// A set of key-value attributes
         /// </summary>
         Dictionary<string, object> Attributes { get; set; }
 
         /// <summary>
-        /// The add attribute.
+        /// Adds a new attribute to the collection
         /// </summary>
-        /// <param name="key">
-        /// The key.
-        /// </param>
-        /// <param name="value">
-        /// The value.
-        /// </param>
+        /// <param name="key">Key to be added</param>
+        /// <param name="value">Value of the attribute</param>
         void AddAttribute(string key, object value);
 
         /// <summary>
-        /// The add atributes to request.
+        /// Adds an attribute to the request. Replaces the placeholder with the actual attributes
         /// </summary>
-        /// <param name="input">
-        /// The input.
-        /// </param>
+        /// <param name="input">The input to be replaced</param>
         void AddAtributesToRequest(ref string input);
     }
 }

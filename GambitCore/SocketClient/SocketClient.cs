@@ -9,24 +9,41 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
+    /// <summary>
+    /// A class for implementation of the WebSocket client, used for sending and receiving message
+    /// </summary>
     public class SocketClient
     {
-        static readonly UTF8Encoding Encoder = new UTF8Encoding();
-
+        private static readonly UTF8Encoding Encoder = new UTF8Encoding();
         private readonly GambitSettings _settings;
         private ClientWebSocket webSocket;
 
+        /// <summary>
+        /// Constructor for initialization of the class
+        /// </summary>
+        /// <param name="settings">A GambitSettings instance. If not provided, the default settings will be used</param>
         public SocketClient(GambitSettings settings = null)
         {
             if (settings == null)
             {
                 settings = GambitSettings.DefaultSettings;
             }
+
             _settings = settings;
         }
 
+        /// <summary>
+        /// Gets or sets the Action that should be executed when message is received
+        /// </summary>
         public Action<MessageResponse> OnMessage { get; set; }
 
+        /// <summary>
+        /// Starts the WebSocket client
+        /// </summary>
+        /// <param name="uri">Url of the WebSocket to connect to</param>
+        /// <param name="json">JSON-Base64 header value</param>
+        /// <param name="payloadHMAC">Payload-HMAC header value</param>
+        /// <returns></returns>
         public async Task Start(string uri, string json, string payloadHMAC)
         {
             var response = new Response<string>();
@@ -63,6 +80,9 @@
             }
         }
 
+        /// <summary>
+        /// Stops the web socket client
+        /// </summary>
         public async Task Stop()
         {
             if (webSocket != null)
@@ -72,7 +92,10 @@
             }
         }
 
-        // What is the purpose of this method?
+        /// <summary>
+        /// Sends a message
+        /// </summary>
+        /// <param name="webSocket">A Web Socket where the message should be send</param>
         private async Task Send(ClientWebSocket webSocket)
         {
             byte[] buffer = new byte[] { (byte)0xFF };
@@ -85,9 +108,12 @@
             }
         }
 
+        /// <summary>
+        /// Listenes for a message
+        /// </summary>
+        /// <param name="webSocket">Web Socket to listen from</param>
         private async Task Receive(ClientWebSocket webSocket)
         {
-
             while (webSocket.State == WebSocketState.Open)
             {
                 byte[] buffer = new byte[_settings.ReceivedChunkSize];
@@ -109,38 +135,38 @@
                         if (OnMessage != null)
                         {
                             //parse string to message
-                            var message = JsonConvert.DeserializeObject<MessageResponse>(
+                            var messageResponse = JsonConvert.DeserializeObject<MessageResponse>(
                                 data,
                                 new JsonSerializerSettings()
                                 {
                                     StringEscapeHandling = StringEscapeHandling.EscapeHtml
                                 });
 
+                            messageResponse.JsonData = JObject.Parse(data);
+
                             //Build ACK package
                             JObject json = new JObject();
                             json.Add("event", "message-received");
-                            json.Add("message_id", message.MessageId);
+                            json.Add("message_id", messageResponse.MessageId);
 
                             var jsonString = JsonConvert.SerializeObject(json);
                             var encoded = Encoder.GetBytes(jsonString);
                             var msgBuffer = new ArraySegment<byte>(encoded, 0, encoded.Length);
                             await webSocket.SendAsync(msgBuffer, WebSocketMessageType.Text, true, CancellationToken.None);
 
-                            OnMessage(message);
+                            OnMessage(messageResponse);
                         }
                     }
-
                 }
                 // Todo: Concrete exception handling
-                catch (Exception e)
+                catch (Exception err)
                 {
-                    var err = e;
                     if (OnMessage != null)
                     {
                         OnMessage(new MessageResponse
                         {
                             EventName = "ERROR DURING MESSAGE RECEIVE",
-                            MessageId = err.Message
+                            JsonData = JObject.FromObject(err)
                         });
                     }
                 }

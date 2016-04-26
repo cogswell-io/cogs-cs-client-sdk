@@ -1,14 +1,29 @@
 ﻿namespace GambitCore
 {
+    /// <summary>
+    /// The Base service class. All services derive from this class
+    /// </summary>
     public abstract class BaseService
     {
+        /// <summary>
+        /// Readonly instance of the GambitSettings
+        /// </summary>
         readonly GambitSettings _settings;
 
-        public BaseService(GambitSettings settings = null) {
+        /// <summary>
+        /// The constructor for initializing a service
+        /// </summary>
+        /// <param name="settings">A GambitSettings instance. If not provided, the default settings will be used</param>
+        public BaseService(GambitSettings settings = null)
+        {
             _settings = settings ?? GambitSettings.DefaultSettings;
         }
 
-        public GambitSettings GambitSettings {
+        /// <summary>
+        /// Gets or sets the GambitSettings for the service instance
+        /// </summary>
+        public GambitSettings GambitSettings
+        {
             get { return _settings; }
         }
     }

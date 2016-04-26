@@ -211,6 +211,11 @@
             get { return this.List.IsReadOnly; }
         }
 
+        /// <summary>
+        /// Removes an item from the list
+        /// </summary>
+        /// <param name="item">The item to remove</param>
+        /// <returns>The result of the removal</returns>
         public bool Remove(TOut item)
         {
             return this.List.Remove(this.ToInner(item));

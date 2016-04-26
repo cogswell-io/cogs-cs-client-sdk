@@ -4,22 +4,26 @@
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// The client secret post body.
+    /// A model for the body of the ClientSecret request
     /// </summary>
     [DataContract]
     public class ClientSecretModel : IClientSecretPostBody
     {
+        /// <summary>
+        /// Gets or sets the access key for the request
+        /// </summary>
         [DataMember(Name = "access_key")]
         public string AccessKey { get; set; }
 
+        /// <summary>
+        /// Gets or sets the timestamp of the request
+        /// </summary>
         [DataMember(Name = "timestamp")]
         public string Timestamp { get; set; }
 
         /// <summary>
-        /// The validate required proparties.
+        /// Validates the required properties
         /// </summary>
-        /// <exception cref="ArgumentException">
-        /// </exception>
         public void ValidateRequiredProparties()
         {
             if (string.IsNullOrEmpty(this.AccessKey))

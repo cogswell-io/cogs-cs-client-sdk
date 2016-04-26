@@ -5,13 +5,13 @@
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// The event attributes.
+    /// Holding the attributes for an event
     /// </summary>
     [DataContract]
     public class EventAttributes : IEventAttributes
     {
         /// <summary>
-        /// The event attributes place holder.
+        /// Placeholder if there is no attributes for an event
         /// </summary>
         internal const string EventAttributesPlaceHolder = "ATTRIBUTES_PLACE_HOLDER";
 
@@ -24,32 +24,24 @@
         }
 
         /// <summary>
-        /// Gets or sets the attributes.
+        /// A set of key-value attributes
         /// </summary>
         public Dictionary<string, object> Attributes { get; set; }
 
         /// <summary>
-        /// The add attribute.
+        /// Adds a new attribute to the collection
         /// </summary>
-        /// <param name="key">
-        /// The key.
-        /// </param>
-        /// <param name="value">
-        /// The value.
-        /// </param>
+        /// <param name="key">Key to be added</param>
+        /// <param name="value">Value of the attribute</param>
         public void AddAttribute(string key, object value)
         {
             this.Attributes.Add(key, value);
         }
 
         /// <summary>
-        /// The add atributes to request.
+        /// Adds an attribute to the request. Replaces the placeholder with the actual attributes
         /// </summary>
-        /// <param name="input">
-        /// The input.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// </exception>
+        /// <param name="input">The input to be replaced</param>
         public void AddAtributesToRequest(ref string input)
         {
             if (string.IsNullOrEmpty(input))

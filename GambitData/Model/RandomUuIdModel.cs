@@ -22,10 +22,8 @@
         public string Timestamp { get; set; }
 
         /// <summary>
-        /// The validate required proparties.
+        /// Validates the required properties and throws an exception if some of the fields is not entered
         /// </summary>
-        /// <exception cref="ArgumentException">
-        /// </exception>
         public void ValidateRequiredProparties()
         {
             if (string.IsNullOrEmpty(this.AccessKey))

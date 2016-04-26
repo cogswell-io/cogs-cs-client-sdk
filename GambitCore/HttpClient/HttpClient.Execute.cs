@@ -7,9 +7,21 @@
     using System.Threading;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Responsible for the execution of the HttpRequest
+    /// </summary>
     public partial class HttpClient
     {
-
+        /// <summary>
+        /// Execute request
+        /// </summary>
+        /// <param name="method">Http Method</param>
+        /// <param name="requestUri">Destination Uri for the request</param>
+        /// <param name="json">JSON body</param>
+        /// <param name="payloadHMAC">Payload HMAC header</param>
+        /// <param name="completionOption">Completion Option</param>
+        /// <param name="cancellationToken">Cancellation Token</param>
+        /// <returns>Return HttpResponseMessage</returns>
         private async Task<HttpResponseMessage> ExecuteAsync(
             HttpMethod method,
             string requestUri,
@@ -28,7 +40,6 @@
             {
                 try
                 {
-
                     var request = new HttpRequestMessage(method, requestUri);
 
                     if (method != HttpMethod.Get)
@@ -39,7 +50,6 @@
                     {
                         if (json != null) DefaultRequestHeaders.Add("JSON-Base64", json);
                     }
-
 
                     if(payloadHMAC != null) DefaultRequestHeaders.Add("Payload-HMAC", payloadHMAC);
 

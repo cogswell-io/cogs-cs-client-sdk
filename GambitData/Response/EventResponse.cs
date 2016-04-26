@@ -2,6 +2,9 @@
 {
     using System.Runtime.Serialization;
 
+    /// <summary>
+    /// The EventResponse
+    /// </summary>
     [DataContract]
     public class EventResponse : IEventResponseCode200
     {

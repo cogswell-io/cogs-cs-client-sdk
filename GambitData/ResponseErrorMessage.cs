@@ -2,6 +2,9 @@
 {
     using System.Runtime.Serialization;
 
+    /// <summary>
+    /// The ResponseErrorMessage
+    /// </summary>
     [DataContract]
     public class ResponseErrorMessage : IResponseErrorMessage
     {

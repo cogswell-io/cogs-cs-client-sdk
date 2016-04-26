@@ -12,6 +12,9 @@
     [Export(typeof(IProperties))]
     public class Properties : IProperties
     {
+        /// <summary>
+        /// Constructor for initializing the class
+        /// </summary>
         public Properties()
         {
             MyClientSecret = new PropertieBody();
@@ -68,6 +71,9 @@
         [DataMember(Name = "tags")]
         PropertieBody MyTags { get; set; }
 
+        /// <summary>
+        /// Gets or sets the client secret object.
+        /// </summary>
         [IgnoreDataMember]
         public IPropertieBody ClientSecretObject
         {
@@ -82,6 +88,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the client salt object.
+        /// </summary>
         [IgnoreDataMember]
         public IPropertieBody ClientSaltObject
         {
@@ -96,6 +105,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the error message object.
+        /// </summary>
         [IgnoreDataMember]
         public IPropertieBody ErrorMessageObject
         {
@@ -110,6 +122,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the message object.
+        /// </summary>
         [IgnoreDataMember]
         public IPropertieBody MessageObject
         {
@@ -124,6 +139,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the details object.
+        /// </summary>
         [IgnoreDataMember]
         public IPropertieBody DetailsObject
         {
@@ -138,6 +156,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the event name object.
+        /// </summary>
         [IgnoreDataMember]
         public IPropertieBody EventNameObject
         {
@@ -152,6 +173,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the access key object.
+        /// </summary>
         [IgnoreDataMember]
         public IPropertieBody AccessKeyObject
         {
@@ -166,6 +190,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the attributes object.
+        /// </summary>
         [IgnoreDataMember]
         public IPropertieBody AttributesObject
         {
@@ -180,6 +207,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the campaign id object.
+        /// </summary>
         [IgnoreDataMember]
         public IPropertieBody CampaignIdObject
         {
@@ -194,6 +224,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the namespace object.
+        /// </summary>
         [IgnoreDataMember]
         public IPropertieBody NamespaceObject
         {
@@ -208,6 +241,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the uu id object.
+        /// </summary>
         [IgnoreDataMember]
         public IPropertieBody UuIdObject
         {
@@ -222,6 +258,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the time stamp object.
+        /// </summary>
         [IgnoreDataMember]
         public IPropertieBody TimeStampObject
         {
@@ -236,6 +275,9 @@
             }
         }
 
+        /// <summary>
+        /// Gets or sets the tags object.
+        /// </summary>
         [IgnoreDataMember]
         public IPropertieBody TagsObject
         {

@@ -8,4 +8,4 @@
 [assembly: AssemblyDescription("Cogswell SDK")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("1.1.4")]
+[assembly: AssemblyVersion("1.1.7")]
