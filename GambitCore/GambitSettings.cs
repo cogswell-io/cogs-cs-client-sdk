@@ -55,13 +55,13 @@
         /// </summary>
         public GambitSettings()
         {
-            RetryCount = _retryCountValue;
-            BaseUrl = _baseUrl;
-            SocketUrl = _socketAddress;
-            Timeout = _timeout;
-            UserAgent = _userAgent;
-            ReceivedChunkSize = _receivedChunkSize;
-            DefaultMaxSessionIdleTimeout = TimeSpan.FromMilliseconds(_defaultMaxSessionIdleTimeout);
+            this.RetryCount = _retryCountValue;
+            this.BaseUrl = _baseUrl;
+            this.SocketUrl = _socketAddress;
+            this.Timeout = _timeout;
+            this.UserAgent = _userAgent;
+            this.ReceivedChunkSize = _receivedChunkSize;
+            this.DefaultMaxSessionIdleTimeout = TimeSpan.FromMilliseconds(_defaultMaxSessionIdleTimeout);
         }
 
         /// <summary>

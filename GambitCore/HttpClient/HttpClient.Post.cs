@@ -40,12 +40,12 @@
                 
                 response.StatusCode = (int)httpResponse.StatusCode;
                 response.IsSuccess = httpResponse.IsSuccessStatusCode;
+
                 if (!httpResponse.IsSuccessStatusCode)
                 {
                     response.Message = httpResponse.ReasonPhrase;
                     return response;
                 }
-
                 
                 var json = await httpResponse.Content.ReadAsStringAsync();
                 response.RawData = json;

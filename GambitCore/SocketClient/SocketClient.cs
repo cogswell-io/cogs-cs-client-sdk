@@ -29,7 +29,7 @@
                 settings = GambitSettings.DefaultSettings;
             }
 
-            _settings = settings;
+            this._settings = settings;
         }
 
         /// <summary>
@@ -76,7 +76,9 @@
             finally
             {
                 if (webSocket != null)
+                {
                     webSocket.Dispose();
+                }
             }
         }
 

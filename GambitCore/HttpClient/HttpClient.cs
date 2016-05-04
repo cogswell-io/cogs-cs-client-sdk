@@ -19,16 +19,22 @@
         /// <param name="settings">Gambit settings to be used. If not passed, the default setttings will be used</param>
         public HttpClient(GambitSettings settings = null)
         {
-            if (settings == null) { settings = GambitSettings.DefaultSettings; }
-            _settings = settings;
+            if (settings == null)
+            {
+                settings = GambitSettings.DefaultSettings;
+            }
+
+            this._settings = settings;
 
             BaseAddress = new Uri(settings.BaseUrl);
 
-            if (settings.Timeout > 0) Timeout = TimeSpan.FromSeconds(settings.Timeout);
+            if (settings.Timeout > 0)
+            {
+                Timeout = TimeSpan.FromSeconds(settings.Timeout);
+            }
 
             DefaultRequestHeaders.AcceptEncoding.Clear();
             DefaultRequestHeaders.Accept.TryParseAdd("application/json");
-
 
             DefaultRequestHeaders.UserAgent.ParseAdd(settings.UserAgent);
             DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");

@@ -10,26 +10,11 @@
     [DataContract]
     public class PushModel
     {
-        //[DataMember(Name = "UDID")]
-        //public string UDID { get; set; }
-
-        //[DataMember(Name = "platform")]
-        //public EPlatform Platform { get; set; }
-
-        //[DataMember(Name = "environment")]
-        //public EEnvironment Environment { get; set; }
-
-        //[DataMember(Name = "platform_app_id")]
-        //public string PlatformAppId { get; set; }
-
         /// <summary>
         /// Gets or sets the Namespace
         /// </summary>
         [DataMember(Name = "namespace")]
         public string Namespace { get; set; }
-
-        //[DataMember(Name = "ciid")]
-        //public CiidObject CIID { get; set; }
 
         /// <summary>
         /// Gets or sets the ClientSalt

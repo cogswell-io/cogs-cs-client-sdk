@@ -30,6 +30,7 @@
             {
                 return default(T);
             }
+
             return JsonConvert.DeserializeObject<T>(json);
         }
     }

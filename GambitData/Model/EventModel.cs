@@ -15,7 +15,6 @@
         /// </summary>
         public EventModel()
         {
-            //this.Attributes = EventAttributes.EventAttributesPlaceHolder;
         }
 
         /// <summary>

@@ -44,14 +44,23 @@
 
                     if (method != HttpMethod.Get)
                     {
-                        if (json != null) request.Content = GetContent(json);
+                        if (json != null)
+                        {
+                            request.Content = GetContent(json);
+                        }
                     }
                     else
                     {
-                        if (json != null) DefaultRequestHeaders.Add("JSON-Base64", json);
+                        if (json != null)
+                        {
+                            DefaultRequestHeaders.Add("JSON-Base64", json);
+                        }
                     }
 
-                    if(payloadHMAC != null) DefaultRequestHeaders.Add("Payload-HMAC", payloadHMAC);
+                    if (payloadHMAC != null)
+                    {
+                        DefaultRequestHeaders.Add("Payload-HMAC", payloadHMAC);
+                    }
 
                     httpResponse = await SendAsync(request, completionOption, cancellationToken).ConfigureAwait(false);
 
@@ -70,7 +79,7 @@
                 }
                 retry++;
 
-            } while ((isReachabilityFailure || isAvailabilityFailure) && retry < _settings.RetryCount);
+            } while ((isReachabilityFailure || isAvailabilityFailure) && retry < this._settings.RetryCount);
 
             if (httpResponse == null)
             {

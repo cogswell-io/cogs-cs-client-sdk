@@ -16,7 +16,7 @@
         /// <param name="settings">A GambitSettings instance. If not provided, the default settings will be used</param>
         public BaseService(GambitSettings settings = null)
         {
-            _settings = settings ?? GambitSettings.DefaultSettings;
+            this._settings = settings ?? GambitSettings.DefaultSettings;
         }
 
         /// <summary>
@@ -24,7 +24,7 @@
         /// </summary>
         public GambitSettings GambitSettings
         {
-            get { return _settings; }
+            get { return this._settings; }
         }
     }
 }
