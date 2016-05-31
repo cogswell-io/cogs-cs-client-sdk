@@ -3,13 +3,13 @@
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// The EventResponse
+    /// EventResponse object used for the http event responses in the GabitSDK Service
     /// </summary>
     [DataContract]
-    public class EventResponse : IEventResponseCode200
+    public class EventResponse
     {
         /// <summary>
-        /// Gets or sets the message.
+        /// The response's message
         /// </summary>
         [DataMember(Name = "message")]
         public string Message { get; set; }

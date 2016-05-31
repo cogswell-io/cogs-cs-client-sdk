@@ -5,20 +5,18 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    /// <summary>
-    /// Handling the HTTP GET method sending
-    /// </summary>
     public partial class HttpClient
     {
         /// <summary>
-        /// Gets a message
+        /// Send a GET request to the specified Uri as an asynchronous operation 
+        /// with client secret HMAC Payload and cancellation token
         /// </summary>
         /// <typeparam name="T">Type of the response object</typeparam>
-        /// <param name="requestUri">Destination Uri for the request</param>
-        /// <param name="jsonBase64">Base 64 JSON</param>
+        /// <param name="requestUri">The full destination Url for the request (eg. <example>http://host.com/path</example>)</param>
+        /// <param name="jsonBase64">Base 64 JSON string</param>
         /// <param name="clientSecretPayloadHMAC">Secret Payload HMAC of the client</param>
         /// <param name="cancellationToken">Cancellation Token</param>
-        /// <returns>Return response in the type that is requested(T)</returns>
+        /// <returns>Return a response in the type that is requested(T) <see cref="Response{T}"/></returns>
         public async Task<Response<T>> GetAsync<T>(
            string requestUri,
            string jsonBase64 = null,

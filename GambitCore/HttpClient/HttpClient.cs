@@ -1,22 +1,26 @@
 ﻿namespace GambitCore
 {
-	using System;
-	using SystemHttpClient = System.Net.Http.HttpClient;
+    using System;
+    using SystemHttpClient = System.Net.Http.HttpClient;
 
     /// <summary>
-    /// Overrides the system HttpClient class
+    /// A class that extends the system <see cref="System.Net.Http.HttpClient"/> class
+    /// Handles the execution of HttpRequests
     /// </summary>
     public partial class HttpClient : SystemHttpClient
     {
         /// <summary>
-        /// Instance of the GambitSettings to be used
+        /// Instance of the <see cref="GambitSettings"/> to be used
         /// </summary>
         private readonly GambitSettings _settings;
 
         /// <summary>
         /// Constructor for initializing the HttpClient, with the option to receive custom Gambit settings
         /// </summary>
-        /// <param name="settings">Gambit settings to be used. If not passed, the default setttings will be used</param>
+        /// <param name="settings">
+        ///     <see cref="GambitSettings"/> to be used. If not passed, the default setttings 
+        ///     <see cref="GambitSettings.DefaultSettings"/> will be used
+        /// </param>
         public HttpClient(GambitSettings settings = null)
         {
             if (settings == null)

@@ -7,17 +7,14 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    /// <summary>
-    /// Responsible for the execution of the HttpRequest
-    /// </summary>
     public partial class HttpClient
     {
         /// <summary>
-        /// Execute request
+        /// Executes an asynchronous HTTP request with the provided parameters
         /// </summary>
         /// <param name="method">Http Method</param>
-        /// <param name="requestUri">Destination Uri for the request</param>
-        /// <param name="json">JSON body</param>
+        /// <param name="requestUri">The full destination Url for the request (eg. <example>http://host.com/path</example>)</param>
+        /// <param name="json">stringified JSON body</param>
         /// <param name="payloadHMAC">Payload HMAC header</param>
         /// <param name="completionOption">Completion Option</param>
         /// <param name="cancellationToken">Cancellation Token</param>
@@ -92,7 +89,7 @@
             return httpResponse;
         }
 
-        public HttpContent GetContent(string json)
+        private HttpContent GetContent(string json)
         {
             return new StringContent(json, Encoding.UTF8, "application/json");
         }

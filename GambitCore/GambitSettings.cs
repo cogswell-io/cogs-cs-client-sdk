@@ -26,7 +26,7 @@
         public const string ClientSecretPath = "/client_secret";
 
         /// <summary>
-        /// The path where the event requests shoul be executed
+        /// The path where the event requests should be executed
         /// </summary>
         public const string EventPath = "/event";
 
@@ -65,7 +65,7 @@
         }
 
         /// <summary>
-        /// A static constructor for initiazion of the class before accessing it
+        /// A static constructor for initialization of the class before accessing it
         /// </summary>
         static GambitSettings()
         {

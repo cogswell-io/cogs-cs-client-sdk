@@ -6,40 +6,34 @@ namespace Gambit.Data.Response
     using Newtonsoft.Json.Linq;
 
     /// <summary>
-    /// The message response
+    /// Message response object used to deserialize incoming messages over web sockets
     /// </summary>
     [DataContract]
     public class MessageResponse
     {
         /// <summary>
-        /// Gets or sets the MessageId
+        /// The Id for the received message
         /// </summary>
         [DataMember(Name = "message_id")]
         public string MessageId { get; set; }
 
         /// <summary>
-        /// Gets or sets the CampaignName
+        /// The Camaping Name for the received message
         /// </summary>
         [DataMember(Name = "campaign_name")]
         public string CampaignName { get; set; }
 
         /// <summary>
-        /// Gets or sets the Namespace
+        /// The Namespace for the received message
         /// </summary>
         [DataMember(Name = "namespace")]
         public string Namespace { get; set; }
 
         /// <summary>
-        /// Gets or sets the EventName
+        /// The Event name for the received message
         /// </summary>
         [DataMember(Name = "event_name")]
         public string EventName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the ForwardedEvent
-        /// </summary>
-        [DataMember(Name = "forwarded_event")]
-        public ForwardedEvent ForwardedEvent { get; set; }
 
         /// <summary>
         /// The received message formatted as json object

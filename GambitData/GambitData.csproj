@@ -57,20 +57,15 @@
   <ItemGroup>
     <Compile Include="Model\PushModel.cs" />
     <Compile Include="NamespaceAttribute.cs" />
-    <Compile Include="Common\ConvertingList.cs" />
     <Compile Include="Model\MessageModel.cs" />
     <Compile Include="Model\EventModel.cs" />
     <Compile Include="Response\EventResponse.cs" />
-    <Compile Include="Interfaces\IEventPostBody.cs" />
-    <Compile Include="Interfaces\IEventResponseCode200.cs" />
+    <Compile Include="Interfaces\IEventModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Response\ForwardedEvent.cs" />
     <Compile Include="Response\MessageResponse.cs" />
     <Compile Include="Response\NamespaceResponse.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Request\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

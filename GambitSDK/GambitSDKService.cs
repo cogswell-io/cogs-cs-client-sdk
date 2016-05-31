@@ -16,11 +16,13 @@ namespace GambitSDK
     /// </summary>
     public class GambitSDKService : BaseService, IGambitSDKService
     {
+        private SocketClient socketClient;
+
         /// <summary>
         /// Constructor for initialization of the class
         /// </summary>
         /// <param name="settings">Optional. Instance of application settings</param>
-        public GambitSDKService(GambitSettings settings = null) 
+        public GambitSDKService(GambitSettings settings = null)
             : base(settings)
         {
         }
@@ -32,7 +34,7 @@ namespace GambitSDK
         /// <param name="secretKey">Secret key for authentication</param>
         /// <returns>Event response</returns>
         public async Task<Response<EventResponse>> EventAsync(
-            EventModel eventModel,
+            IEventModel eventModel,
             string secretKey)
         {
             if (string.IsNullOrEmpty(eventModel.Timestamp))
@@ -63,8 +65,11 @@ namespace GambitSDK
         /// </summary>
         /// <param name="pushModel">Data to push</param>
         /// <param name="clientSecret">Client secret key</param>
-        /// <param name="action">Declare callback that recieve message</param>
-        public SocketClient PushAsync(PushModel pushModel, string clientSecret, Action<MessageResponse> action = null)
+        /// <param name="action">
+        /// An optional method that will be performed for each received message.
+        /// <para>The method signature should have a single parameter of <see cref="MessageResponse"/> and should return void</para>
+        /// </param>
+        public async Task PushAsync(PushModel pushModel, string clientSecret, Action<MessageResponse> action = null)
         {
             pushModel.Timestamp = ServiceUtil.CurrentDate();
 
@@ -74,16 +79,22 @@ namespace GambitSDK
 
             string clientSecretPayloadHMAC = GambitEncryption.HMACSHA256(clientSecret, jsonString);
 
-            var client = new SocketClient(GambitSettings);
+            socketClient = new SocketClient(GambitSettings);
 
-            client.OnMessage = action;
+            socketClient.OnMessage = action;
 
-            Task.Run(() =>
+            await socketClient.Start(GambitSettings.SocketUrl, jsonBase64, clientSecretPayloadHMAC);
+        }
+
+        /// <summary>
+        /// Terminates the current socket connection
+        /// </summary>
+        public async Task EndPushAsync()
+        {
+            if (socketClient != null)
             {
-                client.Start(GambitSettings.SocketUrl, jsonBase64, clientSecretPayloadHMAC);
-            });
-
-            return client;
+                await socketClient.Stop();
+            }
         }
 
         /// <summary>
@@ -121,7 +132,7 @@ namespace GambitSDK
         /// <summary>
         /// Fetches the schema for a particular namespace
         /// </summary>
-        /// <param name="name">Name of the namespace that should be retreived</param>
+        /// <param name="name">Name of the namespace that should be retrieved</param>
         /// <param name="accessKey">Access key</param>
         /// <param name="secretKey">Secret key</param>
         /// <returns>Returns namespace schema details</returns>

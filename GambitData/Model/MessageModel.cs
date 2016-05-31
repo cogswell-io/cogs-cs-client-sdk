@@ -11,38 +11,43 @@
     public class MessageModel
     {
         /// <summary>
-        /// Gets of sets the ClientSalt
+        /// The ClientSalt for the message
         /// </summary>
         [DataMember(Name = "client_salt")]
         public string ClientSalt { get; set; }
 
         /// <summary>
-        /// Gets or sets the AccessKey
+        /// The Message access key used for the the GambitSDK Service
         /// </summary>
         [DataMember(Name = "access_key")]
         public string AccessKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the Namespace
+        /// The namespace for the message
         /// </summary>
         [DataMember(Name = "namespace")]
         public string Namespace { get; set; }
 
         /// <summary>
-        /// Gets or sets the Timestamp
+        /// The timestamp for the event as <see cref="string"/>
+        /// ISO-8601 <example>2016-01-15T11:54+0000</example>
         /// </summary>
         [DataMember(Name = "timestamp")]
         public string Timestamp { get; set; }
 
         /// <summary>
-        /// Gets or sets the Attributes
+        /// A dictionary that stores the Message attributes as a <see cref="string"/> key and <see cref="object"/> value pair
         /// </summary>
         [DataMember(Name = "attributes")]
         public Dictionary<string, object> Attributes { get; set; }
 
         /// <summary>
-        /// Validates the required properties and throws an exception if some of the fields is not entered
+        /// Validates the properties of the message.
+        /// Used to assert that all required properties are set
         /// </summary>
+        /// <exception cref="ArgumentException">
+        /// Thrown if there is a required property that isn't set or is an empty string
+        /// </exception>
         public void ValidateRequiredProparties()
         {
             if (string.IsNullOrEmpty(this.ClientSalt))

@@ -5,21 +5,19 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    /// <summary>
-    /// Handling the HTTP POST method sending
-    /// </summary>
     public partial class HttpClient
     {
         /// <summary>
-        /// Posts a message
+        /// Send a POST request to the specified Uri as an asynchronous operation 
+        /// with client secret json and HMAC Payload with cancellation token
         /// </summary>
         /// <typeparam name="T">Type of the response</typeparam>
-        /// <param name="requestUri">Destination Uri for the request</param>
+        /// <param name="requestUri">The full destination Url for the request (eg. <example>http://host.com/path</example>)</param>
         /// <param name="clientSecretJson">Client Secret in JSON format</param>
         /// <param name="clientSecretPayloadHMAC">>Secret Payload HMAC of the client</param>
         /// <param name="settings">GambitSettings instance</param>
         /// <param name="cancellationToken">Cancellation Token</param>
-        /// <returns>Returns response in the type that is requested(T)</returns>
+        /// <returns>Return a response in the type that is requested(T) <see cref="Response{T}"/></returns>
         public async Task<Response<T>> PostAsync<T>(
             string requestUri,
             string clientSecretJson,
@@ -37,7 +35,7 @@
                     clientSecretPayloadHMAC,
                     HttpCompletionOption.ResponseHeadersRead,
                     cancellationToken);
-                
+
                 response.StatusCode = (int)httpResponse.StatusCode;
                 response.IsSuccess = httpResponse.IsSuccessStatusCode;
 
@@ -46,7 +44,7 @@
                     response.Message = httpResponse.ReasonPhrase;
                     return response;
                 }
-                
+
                 var json = await httpResponse.Content.ReadAsStringAsync();
                 response.RawData = json;
                 response.Result = JsonHelper.ToItem<T>(json);

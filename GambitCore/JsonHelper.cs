@@ -8,7 +8,7 @@
     internal class JsonHelper
     {
         /// <summary>
-        /// A static constructor for initiazion of the class before accessing it
+        /// A static constructor for initialization of the class before accessing it
         /// </summary>
         static JsonHelper()
         {

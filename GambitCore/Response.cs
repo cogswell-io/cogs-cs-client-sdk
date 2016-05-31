@@ -1,10 +1,10 @@
 ﻿namespace GambitCore
 {
-    using Newtonsoft.Json.Linq;
     using System;
+    using Newtonsoft.Json.Linq;
 
     /// <summary>
-    /// Response of type T. It is used everywhere where the response from the server is received (Event, Namespace, Message)
+    /// Generic server response. It is used where a response from the server is received (Event, Namespace, Message)
     /// </summary>
     /// <typeparam name="T">Type of the response</typeparam>
     public class Response<T> : Response
@@ -52,7 +52,7 @@
         }
 
         /// <summary>
-        /// Gets or sets the message of the response
+        /// Gets or sets the response message
         /// </summary>
         public string Message { get; set; }
 
@@ -62,12 +62,16 @@
         public int StatusCode { get; set; }
 
         /// <summary>
-        /// Gets or sets the status of the request
+        /// A flag providing information if the response is successful or not
+        /// <remarks>
+        /// If the response is not successfull you can checkout details about the fault 
+        /// in <see cref="ErrorCode"/> and <see cref="ErrorDetails"/>
+        /// </remarks>
         /// </summary>
         public bool IsSuccess { get; set; }
 
         /// <summary>
-        /// Gets or sets the message string in JSON format
+        /// Gets or sets the message string in JSON format as <see cref="JObject"/>
         /// </summary>
         public JObject Object { get; set; }
 

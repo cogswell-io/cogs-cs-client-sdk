@@ -4,13 +4,13 @@
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// The NamespaceResponse
+    /// Namespace schema details model for http responses
     /// </summary>
     [DataContract]
     public class NamespaceResponse
     {
         /// <summary>
-        /// Gets or sets the Attributes
+        /// An enumeration of namespace attributes for the namespace response
         /// </summary>
         [DataMember(Name = "attributes")]
         public IEnumerable<NamespaceAttribute> Attributes { get; set; }

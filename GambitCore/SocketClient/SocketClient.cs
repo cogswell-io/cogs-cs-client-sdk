@@ -19,9 +19,9 @@
         private ClientWebSocket webSocket;
 
         /// <summary>
-        /// Constructor for initialization of the class
+        /// Constructs a new instance of the SocketClient
         /// </summary>
-        /// <param name="settings">A GambitSettings instance. If not provided, the default settings will be used</param>
+        /// <param name="settings">A <see cref="GambitSettings"/> instance. If not provided, the default settings will be used</param>
         public SocketClient(GambitSettings settings = null)
         {
             if (settings == null)
@@ -40,20 +40,19 @@
         /// <summary>
         /// Starts the WebSocket client
         /// </summary>
-        /// <param name="uri">Url of the WebSocket to connect to</param>
+        /// <param name="uri">Full url of the WebSocket to connect to</param>
         /// <param name="json">JSON-Base64 header value</param>
         /// <param name="payloadHMAC">Payload-HMAC header value</param>
-        /// <returns></returns>
         public async Task Start(string uri, string json, string payloadHMAC)
         {
             var response = new Response<string>();
 
             try
             {
-                if (webSocket == null)
-                {
-                    webSocket = new ClientWebSocket();
-                }
+                // Close existing websocket if any and start clean
+                await Stop();
+
+                this.webSocket = new ClientWebSocket();
 
                 ClientWebSocketOptions option = webSocket.Options;
                 option.SetRequestHeader("JSON-Base64", json);
@@ -134,30 +133,28 @@
                     else
                     {
                         string data = Encoder.GetString(buffer);
-                        if (OnMessage != null)
-                        {
-                            //parse string to message
-                            var messageResponse = JsonConvert.DeserializeObject<MessageResponse>(
-                                data,
-                                new JsonSerializerSettings()
-                                {
-                                    StringEscapeHandling = StringEscapeHandling.EscapeHtml
-                                });
 
-                            messageResponse.JsonData = JObject.Parse(data);
+                        //parse string to message
+                        var messageResponse = JsonConvert.DeserializeObject<MessageResponse>(
+                            data,
+                            new JsonSerializerSettings()
+                            {
+                                StringEscapeHandling = StringEscapeHandling.EscapeHtml
+                            });
 
-                            //Build ACK package
-                            JObject json = new JObject();
-                            json.Add("event", "message-received");
-                            json.Add("message_id", messageResponse.MessageId);
+                        messageResponse.JsonData = JObject.Parse(data);
 
-                            var jsonString = JsonConvert.SerializeObject(json);
-                            var encoded = Encoder.GetBytes(jsonString);
-                            var msgBuffer = new ArraySegment<byte>(encoded, 0, encoded.Length);
-                            await webSocket.SendAsync(msgBuffer, WebSocketMessageType.Text, true, CancellationToken.None);
+                        //Build ACK package
+                        JObject json = new JObject();
+                        json.Add("event", "message-received");
+                        json.Add("message_id", messageResponse.MessageId);
 
-                            OnMessage(messageResponse);
-                        }
+                        var jsonString = JsonConvert.SerializeObject(json);
+                        var encoded = Encoder.GetBytes(jsonString);
+                        var msgBuffer = new ArraySegment<byte>(encoded, 0, encoded.Length);
+                        await webSocket.SendAsync(msgBuffer, WebSocketMessageType.Text, true, CancellationToken.None);
+
+                        if (OnMessage != null) OnMessage(messageResponse);
                     }
                 }
                 // Todo: Concrete exception handling

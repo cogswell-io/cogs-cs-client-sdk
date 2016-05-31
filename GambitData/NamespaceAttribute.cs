@@ -3,39 +3,39 @@
     using System.Runtime.Serialization;
 
     /// <summary>
-    /// The Namespace attribute
+    /// Class that stores information for namespace attributes
     /// </summary>
     [DataContract(Name = "attributes")]
     public class NamespaceAttribute
     {
         /// <summary>
-        /// Gets or sets the name
+        /// The name of the attribute
         /// </summary>
         [DataMember(Name = "name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the DataType
+        /// The DataType of the attribute
         /// </summary>
         [DataMember(Name = "data_type")]
         public string DataType { get; set; }
 
         /// <summary>
-        /// Gets or sets the Core
+        /// The Core of the attribute
         /// </summary>
         [DataMember(Name = "core")]
         public bool Core { get; set; }
 
         /// <summary>
-        /// Gets or sets the CIID
+        /// The CIID of the attribute
         /// </summary>
         [DataMember(Name = "ciid")]
         public bool CIID { get; set; }
 
         /// <summary>
-        /// Gets or sets the Value
+        /// The Value of the attribute
         /// </summary>
-        [DataMember(IsRequired=false)]
+        [DataMember(IsRequired = false)]
         public string Value { get; set; }
     }
 }

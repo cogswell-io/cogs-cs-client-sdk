@@ -6,14 +6,14 @@
     using System.Text;
 
     /// <summary>
-    /// Responsible for the enctyption of a string value
+    /// Responsible for the encryption of a string value
     /// </summary>
     public class GambitEncryption
     {
         /// <summary>
         /// Encrypts a string in HMACSHA256 with given key
         /// </summary>
-        /// <param name="key">Key for encrryption</param>
+        /// <param name="key">Key for encryption</param>
         /// <param name="body">String to be encrypted</param>
         /// <returns>HMACSHA256 encrypted string</returns>
         public static string HMACSHA256(string key, string body)
